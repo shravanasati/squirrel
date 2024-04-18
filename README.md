@@ -39,7 +39,53 @@ source ./venv/bin/activate
 poetry install --no-root
 ```
 
-5. Run the server.
+5. MySQL setup.
+
+5. Setup the database.
+
+Login into MySQL using the command:
+```sh
+mysql -u {username} -p
+```
+
+Create the `hacknuthon` database:
+```sh
+create database hacknuthon;
+```
+
+Now, go the project base and add a file named with `.env` with the following content:
+
+```
+MYSQL_USERNAME={username}
+MYSQL_PASSWORD={password}
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+DB_POOL_SIZE=50
+DB_POOL_RECYCLE=1800
+```
+
+The host and port arguments here are the default ones. If your MySQL server runs on a different host and port, modify them accordingly. The `DB_POOL_SIZE` indicates the size of connection pool used my SQLAlchemy. The `DB_POOL_RECYCLE` value indicates the duration in seconds after which the connection should be recycled
+
+(don't include curly braces in the file)
+
+6. More configurations.
+
+Another configuration you'd need to be able to run the server is `SECRET_KEY`, which is used by login manager to keep client-side sessions secure.
+
+Generate a safe secret key using python:
+```sh
+python -c "import secrets;print(secrets.token_hex(64))"
+```
+
+Set the value as follows, in the `.env` file:
+```
+SECRET_KEY={secret_key}
+```
+
+
+7. Run the server.
+
+**Always** execute these commands inside an activated virtual environment.
 
 ```sh
 flask --app app run
@@ -60,4 +106,4 @@ for running the server as well as having reload on browser.
 ```sh
 stella run serve-all
 ```
-to serve on all interfaces (i.e., to view the website on a mobile on the same network)
+to serve on all interfaces (i.e., to view the website on a mobile on the same network).
