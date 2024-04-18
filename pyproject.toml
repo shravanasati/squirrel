@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "hacknuthon-24"
+version = "0.1.0"
+description = "hacknuthon 24 project"
+authors = ["Shravan Asati <dev.shravan@protonmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^3.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
