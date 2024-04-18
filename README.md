@@ -10,7 +10,7 @@ HackNUThon 2024.
 2. Clone the repository (fork first if you want to contribute).
 
 ```sh
-git clone https://github.com/shravanasati/animeviz.git
+git clone https://github.com/shravanasati/hacknuthon.git
 ```
 
 Change the github username in the above URL if you have forked the repository.
@@ -38,3 +38,26 @@ source ./venv/bin/activate
 ```sh
 poetry install --no-root
 ```
+
+5. Run the server.
+
+```sh
+flask --app app run
+```
+
+If you've installed stella, you can get live reloading capabilities for both backend and frontend.
+
+```sh
+stella run server
+```
+for just running the server.
+
+```sh
+stella run
+```
+for running the server as well as having reload on browser.
+
+```sh
+stella run serve-all
+```
+to serve on all interfaces (i.e., to view the website on a mobile on the same network)

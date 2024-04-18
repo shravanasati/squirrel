@@ -6,6 +6,16 @@ browser_wait_interval: 1000
 follow_symlinks: false
 scripts:
 - name: default
-  url: 'localhost:5000'
-  command: flask --app app run
+  url: 'localhost:5133'
+  command: flask --app app run -p 5133
+  shell: false
+
+- name: server
+  url: ''
+  command: flask --app app run -p 5133
+  shell: false
+
+- name: serve-all
+  url: ''
+  command: "flask --app app run -h \"0.0.0.0\" -p \"5133\""
   shell: false
