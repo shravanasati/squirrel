@@ -2,7 +2,6 @@
 
 HackNUThon 2024.
 
-
 ### Development Environment Setup
 
 1. Install [python](https://python.org), [poetry](https://python-poetry.org/), [nodejs](https://nodejs.org/en/download), [mysql](https://www.mysql.com/products/community/) (make sure `mysql` is on PATH) and (optionally) [stella](https://github.com/shravanasati/stellapy) on your system.
@@ -15,7 +14,7 @@ git clone https://github.com/shravanasati/hacknuthon.git
 
 Change the github username in the above URL if you have forked the repository.
 
-3. Create a virtual environment (strongly recommended). 
+3. Create a virtual environment (strongly recommended).
 
 ```sh
 python -m venv venv
@@ -24,11 +23,13 @@ python -m venv venv
 And activate it.
 
 On Windows powershell
+
 ```powershell
 ./venv/Scripts/Activate.ps1
 ```
 
 On unix based systems
+
 ```sh
 source ./venv/bin/activate
 ```
@@ -42,11 +43,13 @@ poetry install --no-root
 5. Setup the database.
 
 Login into MySQL using the command:
+
 ```sh
 mysql -u {username} -p
 ```
 
 Create the `hacknuthon` database:
+
 ```sh
 create database hacknuthon;
 ```
@@ -71,17 +74,44 @@ The host and port arguments here are the default ones. If your MySQL server runs
 Another configuration you'd need to be able to run the server is `SECRET_KEY`, which is used by login manager to keep client-side sessions secure.
 
 Generate a safe secret key using python:
+
 ```sh
 python -c "import secrets;print(secrets.token_hex(64))"
 ```
 
 Set the value as follows, in the `.env` file:
+
 ```
 SECRET_KEY={secret_key}
 ```
 
-
 7. Run the server.
+   execute
+
+```sh
+npm i
+```
+
+this will install all the npm dependencies
+now open 3 terminal sessions and execute following commands in the respective session:
+
+- Session 1
+
+```sh
+npm run tailwind
+```
+
+this will enable the tailwind watcher that detects changes in tailwind css
+
+- Session 2
+
+```sh
+npm run webpack
+```
+
+this will enable the webpack watcher to bundle changes
+
+- Session 3
 
 **Always** execute these commands inside an activated virtual environment.
 
@@ -94,14 +124,19 @@ If you've installed stella, you can get live reloading capabilities for both bac
 ```sh
 stella run server
 ```
+
 for just running the server.
 
 ```sh
 stella run
 ```
+
 for running the server as well as having reload on browser.
 
 ```sh
 stella run serve-all
 ```
+
 to serve on all interfaces (i.e., to view the website on a mobile on the same network).
+
+**ALWAYS** use `ex` command to stop stella **Don't use CTRL + C**
