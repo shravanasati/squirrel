@@ -5,7 +5,7 @@ HackNUThon 2024.
 
 ### Development Environment Setup
 
-1. Install [python](https://python.org), [poetry](https://python-poetry.org/), [mysql](https://www.mysql.com/products/community/) (make sure `mysql` is on PATH) and (optionally) [stella](https://github.com/shravanasati/stellapy) on your system.
+1. Install [python](https://python.org), [poetry](https://python-poetry.org/), [nodejs](https://nodejs.org/en/download), [mysql](https://www.mysql.com/products/community/) (make sure `mysql` is on PATH) and (optionally) [stella](https://github.com/shravanasati/stellapy) on your system.
 
 2. Clone the repository (fork first if you want to contribute).
 
@@ -38,8 +38,6 @@ source ./venv/bin/activate
 ```sh
 poetry install --no-root
 ```
-
-5. MySQL setup.
 
 5. Setup the database.
 

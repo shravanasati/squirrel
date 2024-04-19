@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/shravanasati/stellapy/master/schema.json 
-browser: firefox
+browser: chrome
 include_only: []
 poll_interval: 200
 browser_wait_interval: 500
@@ -7,15 +7,18 @@ follow_symlinks: false
 scripts:
 - name: default
   url: 'localhost:5133'
-  command: flask --app app run -p 5133
+  command: 
+    - flask --app app run -p 5133
   shell: false
 
 - name: server
   url: ''
-  command: flask --app app run -p 5133
+  command: 
+    - flask --app app run -p 5133
   shell: false
 
 - name: serve-all
   url: ''
-  command: "flask --app app run -h \"0.0.0.0\" -p \"5133\""
+  command: 
+    - "flask --app app run -h \"0.0.0.0\" -p \"5133\""
   shell: false
