@@ -16,6 +16,10 @@ app.config["MAX_CONTENT_LENGTH"] = 16 * 1000 * 1000  # 16MB
 def home():
     return render_template("index.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 
 if __name__ == "__main__":
     app.run()

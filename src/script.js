@@ -1,1 +1,1 @@
-console.log("hello world");
+console.log("am am am no sex noooo cyka blyat");

@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "npx tailwindcss -i ./src/input.css -o ./static/styles/style.css && webpack",
+    "webpack": "webpack --watch",
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./static/styles/style.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "tailwindcss": "^3.4.3",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   }
