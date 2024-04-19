@@ -9,7 +9,7 @@ HackNUThon 2024.
 2. Clone the repository (fork first if you want to contribute).
 
 ```sh
-git clone https://github.com/shravanasati/hacknuthon.git
+git clone https://github.com/shravanasati/hacknuthon-24.git
 ```
 
 Change the github username in the above URL if you have forked the repository.
