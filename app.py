@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 from database import db_session, init_db, DB_CONNECTION_URI
+from flask import request
 
 load_dotenv()
 # init_db()
@@ -20,10 +21,17 @@ def home():
 def about():
     return render_template("about.html")
 
+
 #added route of the chat panel
 @app.route("/chat")
-def  chat():
+def chat():
     return render_template("chat.html")
+
+@app.route(" ", methods=["POST"])
+def convert():
+    data = request.json
+    print(data)
+    return data
 
 
 if __name__ == "__main__":
