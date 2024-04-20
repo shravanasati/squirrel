@@ -22,12 +22,5 @@ def home():
 def chat():
     return render_template("chat.html")
 
-@app.route("/convert", methods=["POST"])
-def convert():
-    data = request.json
-    print(data)
-    return data
-
-
 if __name__ == "__main__":
     app.run()
