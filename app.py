@@ -18,12 +18,7 @@ def home():
     return render_template("index.html")
 
 
-<<<<<<< HEAD
-
-#added route of the chat panel
-=======
 # added route of the chat panel
->>>>>>> 6df2eab48e92991121eacf0ada2bc8998ae94e33
 @app.route("/chat")
 def chat():
     return render_template("chat.html")
