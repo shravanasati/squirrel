@@ -1,5 +1,6 @@
 import requests
-
+from database import DBConnectionParams
+from ddl_generator import DDLGenerator
 
 # ollama config
 OLLAMA_PORT = 11434
@@ -12,7 +13,7 @@ SELECTED_MODEL = "sqlcoder"
 # table_metadata are the DDL statements which define the table schema
 PROMPT_TEMPLATE = """
 ### Task
-Generate a MySQL query to answer [QUESTION]{user_question}[/QUESTION]
+Generate a MySQL query to answer [QUESTION]{user_question}[/QUESTION]. You only need to provide the SQL query, no other text. Deliberately go through the schema word by word to appropirately answer the question. Use Table Aliases to prevent ambiguity. For example, `SELECT table1.col1, table2.col1 FROM table1 JOIN table2 ON table1.id = table2.id`. When creating a ratio, always cast the numerator as float.
 
 ### Database Schema
 The query will run on a database with the following schema:
@@ -25,7 +26,9 @@ Given the database schema, here is the SQL query that [QUESTION]{user_question}[
 """
 
 
-def get_response(question: str, table_metadata: str):
+def get_response(question: str, db_params: DBConnectionParams):
+    table_metadata = DDLGenerator(db_params).generate()
+    print(table_metadata)
     payload = {
         "model": SELECTED_MODEL,
         "prompt": PROMPT_TEMPLATE.format(
@@ -61,9 +64,9 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE salespeople (
-  salesperson_id INTEGER PRIMARY KEY, -- Unique ID for each salesperson 
+  salesperson_id INTEGER PRIMARY KEY, -- Unique ID for each salesperson
   name VARCHAR(50), -- Name of the salesperson
-  region VARCHAR(50) -- Geographic sales region 
+  region VARCHAR(50) -- Geographic sales region
 );
 
 CREATE TABLE sales (
@@ -71,7 +74,7 @@ CREATE TABLE sales (
   product_id INTEGER, -- ID of product sold
   customer_id INTEGER,  -- ID of customer who made purchase
   salesperson_id INTEGER, -- ID of salesperson who made the sale
-  sale_date DATE, -- Date the sale occurred 
+  sale_date DATE, -- Date the sale occurred
   quantity INTEGER -- Quantity of product sold
 );
 
@@ -82,8 +85,19 @@ CREATE TABLE product_suppliers (
 );
 
 -- sales.product_id can be joined with products.product_id
--- sales.customer_id can be joined with customers.customer_id 
+-- sales.customer_id can be joined with customers.customer_id
 -- sales.salesperson_id can be joined with salespeople.salesperson_id
 -- product_suppliers.product_id can be joined with products.product_id
 """
-    print(get_response(EXAMPLE_QUESTION, EXAMPLE_TABLE_METADATA))
+    print(
+        get_response(
+            "select all anime whose genre is comedy and drama",
+            DBConnectionParams(
+                user="root",
+                password="oursql1234",
+                host="localhost",
+                port=3306,
+                database="animeviz",
+            ),
+        )
+    )
