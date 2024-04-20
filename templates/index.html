@@ -1,18 +1,66 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>binaryBandits</title>
+<html lang="en" date-theme="business">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='images/favicon.ico') }}"
+    />
+    <title>SQuirreL</title>
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+  </head>
 
-<body>
-    <h1 class="text-3xl font-bold underline">binaryBandits</h1>
+  <body>
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl" href="/">SQuirreL</a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <li>
+            <a
+              href="https://github.com/shravanasati/hacknuthon-24"
+              target="_blank"
+              >GitHub</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
-	<script src=" {{ url_for('static', filename='scripts/script.js') }} "> </script>
-</body>
+    <div class="hero min-h-screen bg-base-200">
+      <div class="hero-content flex-col lg:flex-row-reverse">
+        <img
+          src="{{url_for('static', filename='images/pnglogo.png')}}"
+          class="max-w-sm rounded-lg"
+        />
+        <div>
+          <h1 class="text-5xl font-bold">Chat, Crunch, Code!</h1>
+          <p class="py-6 text-xl">
+            SQuirreL: Simplifying data tasks. Chat, watch queries become SQL. No
+            syntax struggles. Empowering users, saving time. Your smart SQL
+            companion, making database tasks intuitive.
+          </p>
+          <button class="btn btn-primary">
+            <a href="" target="_blank">Get Started</a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+      <aside>
+        <p>Created by Binary Bandits</p>
+      </aside>
+    </footer>
+
+    <script src=" {{ url_for('static', filename='scripts/script.js') }} "></script>
+  </body>
 </html>
