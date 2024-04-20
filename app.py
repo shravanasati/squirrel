@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
-from database import db_session, init_db, DB_CONNECTION_URI
 from flask import request
 
 load_dotenv()
@@ -9,7 +8,6 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
-app.config["SQLALCHEMY_DATABASE_URI"] = DB_CONNECTION_URI
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1000 * 1000  # 16MB
 
 
