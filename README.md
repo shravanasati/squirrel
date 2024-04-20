@@ -3,7 +3,7 @@
 HackNUThon 2024.
 
 ## System idea
-![image]()
+![image](https://github.com/shravanasati/hacknuthon-24/blob/master/static/images/fun.png)
 
 ### Development Environment Setup
 
