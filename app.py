@@ -18,12 +18,13 @@ def home():
     return render_template("index.html")
 
 
-# added route of the chat panel
+
+#added route of the chat panel
 @app.route("/chat")
 def chat():
     return render_template("chat.html")
 
-@app.route(" ", methods=["POST"])
+@app.route("/convert", methods=["POST"])
 def convert():
     data = request.json
     print(data)
