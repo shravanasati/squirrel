@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/shravanasati/stellapy/master/schema.json 
-browser: chrome
+browser: firefox
 include_only: []
 poll_interval: 200
 browser_wait_interval: 500
