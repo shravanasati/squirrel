@@ -83,11 +83,5 @@ block content %}
     </div>
   </div>
 </div>
-<script>
-  let submitBtn = document.getElementById("submit");
-  let theForm = document.getElementById("form");
-  submitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-  });
-</script>
+<script src="{{url_for('static', filename='scripts/script.js')}}"></script>
 {% endblock %}
