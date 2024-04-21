@@ -58,6 +58,7 @@ def build_query():
 
     try:
         llm_resp = get_response(question, db_params)
+        print(llm_resp)
         return {"ok": True, "message": llm_resp}
     except InvalidDBCredentials:
         return {"ok": False, "message": "Invalid database credentials!"}, 400
