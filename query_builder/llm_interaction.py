@@ -6,6 +6,7 @@ from ddl_generator import DDLGenerator
 OLLAMA_PORT = 11434
 OLLAMA_BASE_URL = f"http://127.0.0.1:{OLLAMA_PORT}"
 OLLAMA_GENERATE_ENDPOINT = f"{OLLAMA_BASE_URL}/api/generate"
+OLLAMA_CHAT_ENDPOINT = f"{OLLAMA_BASE_URL}/api/chat"
 SELECTED_MODEL = "sqlcoder"
 
 
@@ -24,6 +25,40 @@ Given the database schema, here is the SQL query that [QUESTION]{user_question}[
 [SQL]
 [/SQL]
 """
+
+chat_history = []
+
+
+def get_response_chat(question: str, db_params: DBConnectionParams):
+    global chat_history
+    if len(chat_history) < 1:
+        table_metadata = DDLGenerator(db_params).generate()
+        print(table_metadata)
+        chat_history.append(
+            {
+                "role": "system",
+                "content": PROMPT_TEMPLATE.format(table_metadata=table_metadata),
+            }
+        )
+    chat_history.append({"role": "user", "content": f"[QUESTION]{question}[/QUESTION]"})
+
+    payload = {
+        "model": SELECTED_MODEL,
+        "messages": chat_history,
+        "stream": False,
+        "options": {"seed": 101, "temperature": 1},
+    }
+    print(payload)
+    resp = requests.post(
+        OLLAMA_CHAT_ENDPOINT,
+        json=payload,
+    )
+    query = resp.json().get("message").get("content")
+    if not query:
+        raise Exception(f"ollama api didnt provide message key:\n{resp.json()}")
+
+    chat_history.append({"role": "assistant", "content": f"[SQL]{query}[/SQL]"})
+    return query.strip()
 
 
 def get_response(question: str, db_params: DBConnectionParams):
@@ -44,7 +79,7 @@ def get_response(question: str, db_params: DBConnectionParams):
     if not query:
         raise Exception(f"ollama api didnt provide response key:\n{resp.json()}")
 
-    return query
+    return query.strip()
 
 
 if __name__ == "__main__":
