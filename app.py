@@ -70,5 +70,37 @@ def build_query():
         }, 500
 
 
+@app.post("/query/execute")
+def execute_query():
+    data = request.json
+    if data is None:
+        return {"ok": False, "message": "Missing JSON object."}, 400
+
+    connection_uri: str | None = data.get("connection_uri")
+    db_params: DBConnectionParams | str | None = connection_uri
+    if not connection_uri:
+        user = data.get("username")
+        password = data.get("password")
+        host = data.get("host")
+        port = data.get("port")
+        database = data.get("dbname")
+
+        conditions = (user, password, host, port, database)
+        conditions = map(lambda x: not x, conditions)
+        if any(conditions):
+            return {
+                "ok": False,
+                "message": "Missing fields to construct the database URI.",
+            }, 400
+
+        db_params = DBConnectionParams(user, password, host, port, database)
+
+    else:
+        db_params = connection_uri
+
+    query = data.get("query")
+    if not query:
+        return {"ok": False, "message": "Missing the question field."}, 400
+
 if __name__ == "__main__":
     app.run()
