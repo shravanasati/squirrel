@@ -2,6 +2,9 @@
 
 HackNUThon 2024.
 
+## System idea
+![image](https://github.com/shravanasati/hacknuthon-24/blob/master/static/images/fun.png)
+
 ### Development Environment Setup
 
 1. Install [python](https://python.org), [poetry](https://python-poetry.org/), [nodejs](https://nodejs.org/en/download), [mysql](https://www.mysql.com/products/community/) (make sure `mysql` is on PATH) and (optionally) [stella](https://github.com/shravanasati/stellapy) on your system.
