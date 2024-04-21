@@ -23,24 +23,24 @@ async function copyToClipboard(copyBtn, text) {
 }
 
 function createTable(results) {
-	let table = document.createElement("table");
-	for (let index = 0; index < results.length; index++) {
-		const row = results[index];
-		let tr = document.createElement("tr");
-		for (let j = 0; j < row.length; j++) {
-			const d = row[j];
-			let td = document.createElement("td");
-			td.innerText = d;
-			tr.appendChild(td);
+  let table = document.createElement("table");
+  for (let index = 0; index < results.length; index++) {
+    const row = results[index];
+    let tr = document.createElement("tr");
+    for (let j = 0; j < row.length; j++) {
+      const d = row[j];
+      let td = document.createElement("td");
+      td.innerText = d;
+      tr.appendChild(td);
       console.log(td);
-		}
+    }
     console.log(tr);
-		table.appendChild(tr)
-	}
-	
-	let tableContainer = document.querySelector("#outputTable");
+    table.appendChild(tr)
+  }
+
+  let tableContainer = document.querySelector("#outputTable");
   tableContainer.innerText = "";
-	tableContainer.appendChild(table);
+  tableContainer.appendChild(table);
 }
 
 let copyBtn = document.querySelector("#copyQuery");
@@ -127,8 +127,7 @@ runQueryBtn.addEventListener("click", async () => {
     let jsonResp = await response.json();
     console.log(jsonResp);
     if (jsonResp.ok) {
-		createTable(jsonResp.results);
-      document.querySelector("#generatedQuery").innerHTML = jsonResp.message;
+      createTable(jsonResp.results);
     } else {
       toggleModal(`Unable to execute the query: ${jsonResp.message}`);
       setTimeout(() => toggleModal("error"), 5000);
@@ -141,7 +140,7 @@ runQueryBtn.addEventListener("click", async () => {
       elem.disabled = false;
     }
     submitBtn.innerText = "Submit";
-	runQueryBtn.disabled = false;
-	runQueryBtn.innerText = "Execute Query";
+    runQueryBtn.disabled = false;
+    runQueryBtn.innerText = "Execute Query";
   }
 });
