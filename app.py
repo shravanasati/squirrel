@@ -33,11 +33,11 @@ def build_query():
     connection_uri: str | None = data.get("connection_uri")
     db_params: DBConnectionParams | str | None = connection_uri
     if not connection_uri:
-        user = data.get("user")
+        user = data.get("username")
         password = data.get("password")
         host = data.get("host")
         port = data.get("port")
-        database = data.get("database")
+        database = data.get("dbname")
 
         conditions = (user, password, host, port, database)
         conditions = map(lambda x: not x, conditions)

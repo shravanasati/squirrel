@@ -5,14 +5,13 @@ block content %}
     <form
       class="flex flex-col justify-center items-center gap-8 w-11/12"
       id="form"
-      onsubmit="submitForm(event)"
     >
       <input
         type="text"
         placeholder="Enter your database username"
         class="input input-bordered w-full max-w-xl"
         id="username"
-        required
+        required autocomplete="on"
       />
       <input
         type="password"
@@ -26,7 +25,7 @@ block content %}
         placeholder="Enter your database host"
         class="input input-bordered w-full max-w-xl"
         id="host"
-        required
+        required autocomplete="on"
       />
       <input
         type="number"
@@ -35,14 +34,14 @@ block content %}
         placeholder="Enter your database port"
         class="input input-bordered w-full max-w-xl"
         id="port"
-        required
+        required autocomplete="on"
       />
       <input
         type="text"
         placeholder="Enter your database name"
         class="input input-bordered w-full max-w-xl"
         id="dbname"
-        required
+        required autocomplete="on"
       />
       <textarea
         placeholder="Enter your question"
@@ -78,7 +77,7 @@ block content %}
         </button>
       </div>
       <div class="grid h-80 card place-items-center overflow-auto max-w-full">
-        Queiries will be executed here if user clicks on execute query
+        Queries will be visualized here if user clicks on execute query
       </div>
     </div>
   </div>
