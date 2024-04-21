@@ -1,12 +1,14 @@
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+
 var modalStatus = false;
 function toggleModal(text) {
   modalStatus = !modalStatus;
   const modalText = document.querySelector("#modalText");
   modalText.innerText = text;
-  if (modalStatus) {
+  if (!modalStatus) {
     modal.classList.add("hidden");
   } else {
     modal.classList.remove("hidden");
