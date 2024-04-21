@@ -8,7 +8,7 @@ sendButton.eventListener("click", () => {
 
     postData("/api", { "question": questionInput });
 })
-function submitForm(event) {
+function submitForm(event){
     // Prevent default form submission behavior
     event.preventDefault();
 
@@ -44,4 +44,6 @@ function submitForm(event) {
             console.error('Error:', error);
         });
 }
-
+runQuery.eventListener("click", () => {
+    
+})
