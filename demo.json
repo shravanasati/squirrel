@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "results": [
+    [1, "Action"],
+    [2, "Adventure"],
+    [4, "Comedy"],
+    [8, "Drama"],
+    [9, "Ecchi"],
+    [49, "Erotica"],
+    [10, "Fantasy"],
+    [47, "Gourmet"],
+    [12, "Hentai"],
+    [14, "Horror"],
+    [62, "Isekai"],
+    [7, "Mystery"],
+    [22, "Romance"],
+    [24, "Sci-Fi"],
+    [36, "Slice of Life"],
+    [30, "Sports"],
+    [41, "Suspense"]
+  ]
+}
