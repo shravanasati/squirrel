@@ -45,7 +45,7 @@ block content %}
         required
       />
       <textarea
-        placeholder="Enter your query"
+        placeholder="Enter your question"
         class="textarea textarea-bordered textarea-sm w-full max-w-xl"
         id="query"
         required
@@ -84,7 +84,7 @@ block content %}
   </div>
 </div>
 <script>
-  let submitBtn = document.getElementById("runQuery");
+  let submitBtn = document.getElementById("submit");
   let theForm = document.getElementById("form");
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
