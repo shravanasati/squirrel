@@ -1,35 +1,72 @@
+import logging
 import os
-from flask import Flask, render_template,jsonify
+from flask import Flask, render_template, request
 from dotenv import load_dotenv
-from flask import request
+
+from query_builder.database import DBConnectionParams, InvalidDBCredentials
+from query_builder.llm_interaction import get_response
 
 load_dotenv()
-# init_db()
 
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1000 * 1000  # 16MB
 
-@app.route("/")
+
+@app.get("/")
 def home():
     return render_template("index.html")
 
-#added route of the chat panel
-@app.route("/chat")
+
+# added route of the chat panel
+@app.get("/chat")
 def chat():
     return render_template("chat.html")
 
-@app.route('/process-form', methods=['POST'])
-def process_form():
-    # Extract form data from the request
-    form_data = request.json
 
-    # Process the form data (you can perform database operations here)
-    # Example: Print the form data
-    print("Received form data:", form_data)
+@app.post("/query/build")
+def build_query():
+    data = request.json
+    if data is None:
+        return {"ok": False, "message": "Missing JSON object."}, 400
 
-    # Return a response (optional)
-    return jsonify({'message': 'Form data received successfully'}), 200
+    connection_uri: str | None = data.get("connection_uri")
+    db_params: DBConnectionParams | str | None = connection_uri
+    if not connection_uri:
+        user = data.get("user")
+        password = data.get("password")
+        host = data.get("host")
+        port = data.get("port")
+        database = data.get("database")
+
+        conditions = (user, password, host, port, database)
+        conditions = map(lambda x: not x, conditions)
+        if any(conditions):
+            return {
+                "ok": False,
+                "message": "Missing fields to construct the database URI.",
+            }, 400
+
+        db_params = DBConnectionParams(user, password, host, port, database)
+
+    else:
+        db_params = connection_uri
+
+    question = data.get("question")
+    if not question:
+        return {"ok": False, "message": "Missing the question field."}, 400
+
+    try:
+        llm_resp = get_response(question, db_params)
+        return {"ok": True, "message": llm_resp}
+    except InvalidDBCredentials:
+        return {"ok": False, "message": "Invalid database credentials!"}, 400
+    except Exception as e:
+        logging.exception(e)
+        return {
+            "ok": False,
+            "message": "Unable to process the request at the moment, please try again later.",
+        }, 500
 
 
 if __name__ == "__main__":

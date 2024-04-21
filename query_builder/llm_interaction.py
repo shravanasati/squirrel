@@ -1,6 +1,6 @@
 import requests
-from database import DBConnectionParams
-from ddl_generator import DDLGenerator
+from .database import DBConnectionParams
+from .ddl_generator import DDLGenerator
 
 # ollama config
 OLLAMA_PORT = 11434
@@ -29,10 +29,11 @@ Given the database schema, here is the SQL query that [QUESTION]{user_question}[
 chat_history = []
 
 
-def get_response_chat(question: str, db_params: DBConnectionParams):
+def get_response_chat(question: str, db_params: DBConnectionParams | str):
     global chat_history
     if len(chat_history) < 1:
-        table_metadata = DDLGenerator(db_params).generate()
+        with DDLGenerator(db_params) as ddlgen:
+            table_metadata = ddlgen.generate()
         print(table_metadata)
         chat_history.append(
             {
@@ -61,9 +62,11 @@ def get_response_chat(question: str, db_params: DBConnectionParams):
     return query.strip()
 
 
-def get_response(question: str, db_params: DBConnectionParams):
-    table_metadata = DDLGenerator(db_params).generate()
+def get_response(question: str, db_params: DBConnectionParams | str) -> str:
+    with DDLGenerator(db_params) as ddlgen:
+        table_metadata = ddlgen.generate()
     print(table_metadata)
+
     payload = {
         "model": SELECTED_MODEL,
         "prompt": PROMPT_TEMPLATE.format(
