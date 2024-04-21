@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from io import StringIO
 from typing import Any
 import mysql.connector
-from database import DBConnectionParams
+from .database import DBConnectionParams, InvalidDBCredentials
 
 
 @dataclass(frozen=True)
@@ -32,10 +32,19 @@ def construct_create_stmt(table_name: str, row_descs: list[TableRowDescription])
 
 
 class DDLGenerator:
-    def __init__(self, connection_params: DBConnectionParams) -> None:
-        self.conn = mysql.connector.connect(**connection_params.asdict())
-        self.cursor = self.conn.cursor()
-        self.STMT_SHOW_TABLES = "show tables;"
+    def __init__(self, connection_params: DBConnectionParams | str) -> None:
+        try:
+            if isinstance(connection_params, str):
+                self.conn = mysql.connector.connect(dsn=connection_params)
+            else:
+                self.conn = mysql.connector.connect(**connection_params.asdict())
+            self.cursor = self.conn.cursor()
+            self.STMT_SHOW_TABLES = "show tables;"
+
+        except Exception:
+            raise InvalidDBCredentials(
+                "invalid db credentials passed, unable to connect to the database"
+            )
 
     def __enter__(self):
         return self
@@ -62,14 +71,13 @@ class DDLGenerator:
 
 
 if __name__ == "__main__":
-    print(
-        DDLGenerator(
-            DBConnectionParams(
-                user="root",
-                password="oursql1234",
-                host="localhost",
-                port=3306,
-                database="animeviz",
-            )
-        ).generate()
-    )
+    with DDLGenerator(
+        DBConnectionParams(
+            user="root",
+            password="oursql1234",
+            host="localhost",
+            port=3306,
+            database="animeviz",
+        )
+    ) as gen:
+        print(gen.generate())

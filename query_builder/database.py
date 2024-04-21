@@ -15,3 +15,7 @@ class DBConnectionParams:
 
     def asdict(self):
         return asdict(self)
+
+
+class InvalidDBCredentials(Exception):
+    pass
