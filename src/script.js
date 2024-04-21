@@ -28,15 +28,18 @@ function createTable(results) {
 		const row = results[index];
 		let tr = document.createElement("tr");
 		for (let j = 0; j < row.length; j++) {
-			const d = tr[j];
+			const d = row[j];
 			let td = document.createElement("td");
 			td.innerText = d;
 			tr.appendChild(td);
+      console.log(td);
 		}
+    console.log(tr);
 		table.appendChild(tr)
 	}
 	
 	let tableContainer = document.querySelector("#outputTable");
+  tableContainer.innerText = "";
 	tableContainer.appendChild(table);
 }
 
@@ -96,12 +99,10 @@ form.addEventListener("submit", async (ev) => {
 
 let runQueryBtn = document.getElementById("runQuery");
 runQueryBtn.addEventListener("click", async () => {
-  ev.preventDefault();
-  ev.stopPropagation();
-
   for (const elem of form.elements) {
     elem.disabled = true;
   }
+  let submitBtn = document.querySelector("#submit");
   submitBtn.innerText = "Please Wait...";
   runQueryBtn.disabled = true;
   runQueryBtn.innerText = "Please Wait...";
@@ -112,7 +113,7 @@ runQueryBtn.addEventListener("click", async () => {
     host: document.querySelector("#host").value,
     port: parseInt(document.querySelector("#port").value),
     dbname: document.querySelector("#dbname").value,
-    query: document.querySelector("#generatedQuery").value,
+    query: document.querySelector("#generatedQuery").innerText,
   };
 
   const jsonData = JSON.stringify(formObj);

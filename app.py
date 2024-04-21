@@ -101,7 +101,7 @@ def execute_query():
 
     query = data.get("query")
     if not query:
-        return {"ok": False, "message": "Missing the question field."}, 400
+        return {"ok": False, "message": "Missing the query field."}, 400
 
     try:
         result = get_execution_result(query, db_params)
