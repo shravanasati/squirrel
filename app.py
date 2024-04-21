@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 from query_builder.database import DBConnectionParams, InvalidDBCredentials
 from query_builder.llm_interaction import get_response
+from query_builder.executor import get_execution_result, QueryExecutionFailed
 
 load_dotenv()
 
@@ -101,6 +102,19 @@ def execute_query():
     query = data.get("query")
     if not query:
         return {"ok": False, "message": "Missing the question field."}, 400
+
+    try:
+        result = get_execution_result(query, db_params)
+        print(result)
+        return {"ok": True, "results": result}
+    except QueryExecutionFailed:
+        return {"ok": False, "message": "Unable to execute query."}, 501
+    except Exception:
+        return {
+            "ok": False,
+            "message": "Unable to process the request at the moment, please try again later.",
+        }, 500
+
 
 if __name__ == "__main__":
     app.run()

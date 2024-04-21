@@ -21,8 +21,12 @@ def get_execution_result(query: str, db_params: DBConnectionParams | str):
 
     except Exception as e:
         logging.exception(e)
-        raise QueryExecutionFailed(f"`{query}` failed to execute")
+        # todo handle connection error differently
+        raise QueryExecutionFailed(e)
 
     finally:
-        cursor.close()
-        conn.commit()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.commit()
+            conn.close()
