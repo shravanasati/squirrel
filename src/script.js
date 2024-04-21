@@ -1,3 +1,6 @@
+const { highlight } = require("sql-highlight");
+
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -45,7 +48,7 @@ form.addEventListener("submit", async (ev) => {
 		let jsonResp = await response.json();
 		console.log(jsonResp);
 		if (jsonResp.ok) {
-			document.querySelector("#generatedQuery").innerText = jsonResp.message;
+			document.querySelector("#generatedQuery").innerText = highlight(jsonResp.message);
 		} else {
 			console.log("show the goddamn error modal");
 		}
