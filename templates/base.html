@@ -1,64 +1,47 @@
 <!DOCTYPE html>
 <!-- TODO: Add Logo Next to the text  -->
 <html lang="en" data-theme="business">
-  <head>
-    {% block head %}
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/favicon.ico') }}"
-    />
+<head>
+  {% block head %}
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{% block title %} {% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
 
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles/style.css') }}"
-    />
-    {% endblock %}
-  </head>
+  <title>{% block title %} {% endblock %}</title>
 
-  <body>
-    {% block navbar %}
-    <!-- <div class="navbar bg-base-100">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
+  {% endblock %}
+</head>
+
+<body>
+  {% block navbar %}
+  <div class="navbar bg-base-100">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl" href="/"
           ><span
             >SQuirreL</a
         >
-      </div> -->
-      <div class="navbar bg-base-100">
-        <div class="flex-1">
-            <!-- Logo -->
-            <a href="/"><img src="../static/images/pnglogo.png" alt="Logo" class="logo" width="50" height="50"></a>
-    
-            <!-- Link to Homepage -->
-            <a class="btn btn-ghost text-xl" href="/"><span>SQuirreL</span></a>
-        </div>
-    </div>
-    
-      <div class="flex-none">
-        <ul class="menu menu-horizontal px-1">
-          <li>
-            <a
-              href="https://github.com/shravanasati/hacknuthon-24"
-              target="_blank"
-              >GitHub</a
-            >
-          </li>
-        </ul>
       </div>
-    </div>
-    {% endblock %} {% block content %} {% endblock %} {% block footer %}
-    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
-      <aside>
-        <p>Created with ❤️‍🔥 by Binary Bandits</p>
-      </aside>
-    </footer>
-    {% endblock %}
-  </body>
+
+
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <li>
+        <a href="https://github.com/shravanasati/hacknuthon-24" target="_blank">GitHub</a>
+      </li>
+    </ul>
+  </div>
+  </div>
+  {% endblock %} {% block content %} {% endblock %} {% block footer %}
+  <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+    <aside>
+      <p>Created with ❤️‍🔥 by Binary Bandits</p>
+    </aside>
+  </footer>
+  {% endblock %}
+</body>
+
 </html>
