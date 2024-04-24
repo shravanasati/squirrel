@@ -43,7 +43,7 @@ source ./venv/bin/activate
 poetry install --no-root
 ```
 
-5. Setup the database.
+<!-- 5. Setup the database.
 
 Login into MySQL using the command:
 
@@ -70,9 +70,9 @@ DB_POOL_RECYCLE=1800
 
 The host and port arguments here are the default ones. If your MySQL server runs on a different host and port, modify them accordingly. The `DB_POOL_SIZE` indicates the size of connection pool used my SQLAlchemy. The `DB_POOL_RECYCLE` value indicates the duration in seconds after which the connection should be recycled
 
-(don't include curly braces in the file)
+(don't include curly braces in the file) -->
 
-6. More configurations.
+5. More configurations.
 
 Another configuration you'd need to be able to run the server is `SECRET_KEY`, which is used by login manager to keep client-side sessions secure.
 

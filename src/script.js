@@ -19,7 +19,7 @@ async function copyToClipboard(copyBtn, text) {
   await navigator.clipboard.writeText(text);
   copyBtn.innerText = "Copied!";
   await sleep(3000);
-  copyBtn.innerText = "Copy";
+  copyBtn.innerText = "Copy Query";
 }
 
 function createTable(results) {
