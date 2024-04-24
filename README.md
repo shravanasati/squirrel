@@ -88,8 +88,9 @@ Set the value as follows, in the `.env` file:
 SECRET_KEY={secret_key}
 ```
 
-7. Run the server.
-   execute
+6. Run the server.
+
+execute
 
 ```sh
 npm i
