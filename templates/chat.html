@@ -1,74 +1,27 @@
 {% extends "base.html" %} {% block title %} SQuirreL | Chat {% endblock %} {%
 block content %}
 <div role="alert" class="alert alert-error hidden" id="modal">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="stroke-current shrink-0 h-6 w-6"
-    fill="none"
-    viewBox="0 0 24 24"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
   </svg>
   <span id="modalText">Error! Task failed successfully.</span>
 </div>
 <div class="flex flex-col w-full lg:flex-row">
   <div class="grid flex-grow card place-items-center h-lvh">
-    <form
-      class="flex flex-col justify-center items-center gap-8 w-11/12"
-      id="form"
-    >
-      <input
-        type="text"
-        placeholder="Enter your database username"
-        class="input input-bordered w-full max-w-xl"
-        id="username"
-        required
-        autocomplete="on"
-      />
-      <input
-        type="password"
-        placeholder="Enter your database password"
-        class="input input-bordered w-full max-w-xl"
-        id="password"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Enter your database host"
-        class="input input-bordered w-full max-w-xl"
-        id="host"
-        required
-        autocomplete="on"
-      />
-      <input
-        type="number"
-        min="0"
-        max="65535"
-        placeholder="Enter your database port"
-        class="input input-bordered w-full max-w-xl"
-        id="port"
-        required
-        autocomplete="on"
-      />
-      <input
-        type="text"
-        placeholder="Enter your database name"
-        class="input input-bordered w-full max-w-xl"
-        id="dbname"
-        required
-        autocomplete="on"
-      />
-      <textarea
-        placeholder="Enter your question"
-        class="textarea textarea-bordered textarea-sm w-full max-w-xl"
-        id="query"
-        required
-      ></textarea>
+    <form class="flex flex-col justify-center items-center gap-8 w-11/12" id="form">
+      <input type="text" placeholder="Enter your database username" class="input input-bordered w-full max-w-xl"
+        id="username" required autocomplete="on" />
+      <input type="password" placeholder="Enter your database password" class="input input-bordered w-full max-w-xl"
+        id="password" required />
+      <input type="text" placeholder="Enter your database host" class="input input-bordered w-full max-w-xl" id="host"
+        required autocomplete="on" />
+      <input type="number" min="0" max="65535" placeholder="Enter your database port"
+        class="input input-bordered w-full max-w-xl" id="port" required autocomplete="on" />
+      <input type="text" placeholder="Enter your database name" class="input input-bordered w-full max-w-xl" id="dbname"
+        required autocomplete="on" />
+      <textarea placeholder="Enter your question" class="textarea textarea-bordered textarea-sm w-full max-w-xl"
+        id="query" required></textarea>
 
       <button class="btn btn-accent w-1/5" id="submit">Submit</button>
     </form>
@@ -76,23 +29,14 @@ block content %}
   <div class="divider lg:divider-horizontal"></div>
   <div class="grid flex-grow card place-items-center h-lvh">
     <div class="flex flex-col flex-wrap w-4/5 h-4/5 border-opacity-50">
-      <div
-        class="grid h-32 card place-items-center overflow-scroll"
-        id="generatedQuery"
-      >
-        Generated queries will be shown here
+      <div class="grid h-32 card place-items-center overflow-scroll">
+        <pre><code id="generatedQuery">Generated queries will be shown here</code></pre>
       </div>
       <div class="divider">
-        <button
-          class="btn btn-primary bg-transparent border-transparent"
-          id="runQuery"
-        >
+        <button class="btn btn-primary bg-transparent border-transparent" id="runQuery">
           Execute Query
         </button>
-        <button
-          class="btn btn-primary bg-transparent border-transparent"
-          id="copyQuery"
-        >
+        <button class="btn btn-primary bg-transparent border-transparent" id="copyQuery">
           Copy Query
         </button>
       </div>

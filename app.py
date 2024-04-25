@@ -104,9 +104,11 @@ def execute_query():
         return {"ok": False, "message": "Missing the query field."}, 400
 
     try:
-        result = get_execution_result(query, db_params)
-        print(result)
-        return {"ok": True, "results": result}
+        result, headings_added = get_execution_result(query, db_params)
+        print(result, headings_added)
+        headings = result[0] if headings_added else None
+        rows = result[1:] if headings_added else result
+        return {"ok": True, "rows": rows, "headings": headings}
     except QueryExecutionFailed:
         return {"ok": False, "message": "Unable to execute query."}, 501
     except Exception:

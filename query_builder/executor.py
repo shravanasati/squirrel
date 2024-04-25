@@ -9,6 +9,10 @@ class QueryExecutionFailed(Exception):
 
 
 def get_execution_result(query: str, db_params: DBConnectionParams | str):
+    """
+    Executes the given query and returns result and an additional bool
+    indicating if the column names are also returned.
+    """
     try:
         if isinstance(db_params, str):
             conn = mysql.connector.connect(dsn=db_params)
@@ -17,7 +21,9 @@ def get_execution_result(query: str, db_params: DBConnectionParams | str):
 
         cursor = conn.cursor()
         cursor.execute(query)
-        return cursor.fetchall()
+        if cursor.description:
+            return [c[0] for c in cursor.description] + cursor.fetchall(), True
+        return cursor.fetchall(), False
 
     except Exception as e:
         logging.exception(e)

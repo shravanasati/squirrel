@@ -16,12 +16,23 @@ async function copyToClipboard(copyBtn, text) {
     setTimeout(() => { copyBtn.innerText = "Copy Query"; }, 3000);
 }
 
-function createTable(results) {
+function createTable(headings, rows) {
     let table = document.createElement("table");
     const tableStyles = "table table-zebra";
     table.classList.add(...tableStyles.split(" "));
-    for (let index = 0; index < results.length; index++) {
-        const row = results[index];
+
+    if (headings) {
+        let tableHeadingRow = document.createElement("tr");
+        headings.forEach((heading) => {
+            const th = document.createElement("th");
+            th.innerText = heading;
+            tableHeadingRow.appendChild(th);
+        })
+        table.appendChild(tableHeadingRow);
+    }
+
+    for (let index = 0; index < rows.length; index++) {
+        const row = rows[index];
         let tr = document.createElement("tr");
         for (let j = 0; j < row.length; j++) {
             const d = row[j];
@@ -125,7 +136,7 @@ runQueryBtn.addEventListener("click", async () => {
         let jsonResp = await response.json();
         console.log(jsonResp);
         if (jsonResp.ok) {
-            createTable(jsonResp.results);
+            createTable(jsonResp.headings, jsonResp.rows);
         } else {
             toggleModal(`Unable to execute the query: ${jsonResp.message}`);
             setTimeout(() => toggleModal("error"), 5000);
