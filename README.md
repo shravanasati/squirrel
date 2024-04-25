@@ -39,9 +39,18 @@ source ./venv/bin/activate
 
 4. Install all the dependencies.
 
+To install all the python dependencies:
+
 ```sh
 poetry install --no-root
 ```
+
+To install all the npm dependencies:
+
+```sh
+npm i
+```
+
 
 <!-- 5. Setup the database.
 
@@ -90,14 +99,7 @@ SECRET_KEY={secret_key}
 
 6. Run the server.
 
-execute
-
-```sh
-npm i
-```
-
-this will install all the npm dependencies
-now open 3 terminal sessions and execute following commands in the respective session:
+Open 3 terminal sessions and execute following commands in the respective session:
 
 - Session 1
 
@@ -105,7 +107,7 @@ now open 3 terminal sessions and execute following commands in the respective se
 npm run tailwind
 ```
 
-this will enable the tailwind watcher that detects changes in tailwind css
+This will enable the tailwind watcher that detects changes in tailwind css.
 
 - Session 2
 
@@ -113,11 +115,11 @@ this will enable the tailwind watcher that detects changes in tailwind css
 npm run webpack
 ```
 
-this will enable the webpack watcher to bundle changes
+This will enable the webpack watcher to bundle javascript.
 
 - Session 3
 
-**Always** execute these commands inside an activated virtual environment.
+**Always** execute python-related commands inside an activated virtual environment.
 
 ```sh
 flask --app app run
@@ -143,4 +145,4 @@ stella run serve-all
 
 to serve on all interfaces (i.e., to view the website on a mobile on the same network).
 
-**ALWAYS** use `ex` command to stop stella **Don't use CTRL + C**
+> **ALWAYS** use `ex` command to stop stella, **don't use `CTRL + C`**.
