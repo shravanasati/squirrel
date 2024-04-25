@@ -18,8 +18,7 @@ async function copyToClipboard(copyBtn, text) {
 
 function createTable(results) {
     let table = document.createElement("table");
-    // TODO add table styles in this string
-    const tableStyles = "";
+    const tableStyles = "table table-zebra";
     table.classList.add(...tableStyles.split(" "));
     for (let index = 0; index < results.length; index++) {
         const row = results[index];
@@ -60,7 +59,6 @@ function disableForm() {
     for (const elem of form.elements) {
         elem.disabled = true;
     }
-
     let submitBtn = document.querySelector("#submit");
     submitBtn.innerText = "Please Wait...";
     // TODO add a loading indicator
@@ -72,6 +70,7 @@ function enableForm() {
     }
     let submitBtn = document.querySelector("#submit");
     submitBtn.innerText = "Submit";
+    // TODO remove the loading indicator
 }
 
 
