@@ -63,6 +63,7 @@ function getFormObject() {
         port: parseInt(document.querySelector("#port").value),
         dbname: document.querySelector("#dbname").value,
         question: document.querySelector("#query").value,
+        query: document.querySelector("#generatedQuery").innerText,
     };
 }
 
